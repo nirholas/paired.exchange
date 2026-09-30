@@ -1,0 +1,25 @@
+# Builds the one container (app + API) and pushes it to Artifact Registry.
+#
+#   gcloud builds submit --config cloudbuild.yaml --region us-central1 \
+#     --project aerial-vehicle-466722-p5 --substitutions=_TAG=v7
+#
+# The launchpad address is compiled into the web bundle, so it is a build
+# argument here rather than a runtime env var. Rolling the image out is a
+# separate `gcloud run services update`, see docs/deploy.md.
+
+substitutions:
+  _TAG: latest
+  _LAUNCHPAD: '0x6a546350f79DE0Fc83ADfCe99233183aA090fa15'
+  _IMAGE: us-central1-docker.pkg.dev/aerial-vehicle-466722-p5/clink/web
+
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ['build', '--build-arg', 'VITE_LAUNCHPAD=${_LAUNCHPAD}', '-t', '${_IMAGE}:${_TAG}', '.']
+
+images: ['${_IMAGE}:${_TAG}']
+
+# The project's default compute service account was deleted, so the build
+# account is pinned explicitly.
+serviceAccount: projects/aerial-vehicle-466722-p5/serviceAccounts/three-ws-build@aerial-vehicle-466722-p5.iam.gserviceaccount.com
+options:
+  logging: CLOUD_LOGGING_ONLY

@@ -13,7 +13,7 @@
 import { parseAbiItem } from 'viem';
 import { publicClient, LAUNCHPAD, cached } from './chain.js';
 
-export const START_BLOCK = BigInt(process.env.CLINK_START_BLOCK || '48325951');
+export const START_BLOCK = BigInt(process.env.PAIRED_START_BLOCK || '48325951');
 
 export const swapEvent = parseAbiItem(
 	'event Swap(address indexed token, address indexed quoteToken, address indexed trader, bool isBuy, uint256 quoteAmount, uint256 tokenAmount, uint256 feeAmount)',

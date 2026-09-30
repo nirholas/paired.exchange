@@ -8,8 +8,8 @@ import { readFileSync } from 'node:fs';
 import { createPublicClient, createWalletClient, defineChain, http, keccak256, toBytes } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 
-const API = process.env.CLINK_API ?? 'https://clink-fun-93741856042.us-central1.run.app';
-const LAUNCHPAD = process.env.CLINK_LAUNCHPAD ?? '0x6a546350f79DE0Fc83ADfCe99233183aA090fa15';
+const API = process.env.PAIRED_API ?? 'https://paired.exchange';
+const LAUNCHPAD = process.env.PAIRED_LAUNCHPAD ?? '0x6a546350f79DE0Fc83ADfCe99233183aA090fa15';
 const KEY = process.env.PRIVATE_KEY;
 if (!KEY) throw new Error('set PRIVATE_KEY');
 
@@ -57,17 +57,17 @@ const evenWeights = (n) => {
 
 const COINS = [
 	{
-		name: 'Chips Party Pack', symbol: 'CHIPS', image: '/tmp/clinkart/chips.png',
+		name: 'Chips Party Pack', symbol: 'CHIPS', image: '/tmp/pairedart/chips.png',
 		description: 'Every semiconductor in one bag. Paired across the whole silicon aisle.',
 		markets: ['NVDA', 'AMD', 'INTC', 'MU'],
 	},
 	{
-		name: 'FAANG', symbol: 'FAANG', image: '/tmp/clinkart/faang.png',
+		name: 'FAANG', symbol: 'FAANG', image: '/tmp/pairedart/faang.png',
 		description: 'The old acronym, five pools deep. One coin quoted against all of big tech.',
 		markets: ['META', 'AAPL', 'AMZN', 'NVDA', 'GOOGL'],
 	},
 	{
-		name: 'Moon Orb', symbol: 'ORB', image: '/tmp/clinkart/orb.png',
+		name: 'Moon Orb', symbol: 'ORB', image: '/tmp/pairedart/orb.png',
 		description: 'Rockets and datacenters. Paired against the two things that go up.',
 		markets: ['SPCX', 'CRWV'],
 	},
@@ -84,7 +84,7 @@ for (const coin of COINS) {
 		method: 'POST', headers: { 'content-type': 'application/json' },
 		body: JSON.stringify({
 			name: coin.name, symbol: coin.symbol, description: coin.description,
-			image: stored.url, website: 'https://github.com/nirholas/clink.fun',
+			image: stored.url, website: 'https://github.com/nirholas/paired.exchange',
 		}),
 	})).json();
 

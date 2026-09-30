@@ -17,7 +17,7 @@ does not keep.
 | Web app, all pages | done |
 | API, images and descriptors | done |
 | SDK, chain and stock registry | partial |
-| MCP server and `clink-mcp` bridge | done |
+| MCP server and `paired-mcp` bridge | done |
 | Deployed to mainnet | not yet |
 | Audit | not yet |
 
@@ -131,7 +131,7 @@ The pieces already exist in this repo and in
 [launch-relay](https://github.com/nirholas/launch-relay), which relays pump.fun
 graduations onto a paired-stock launchpad. Making that first class here:
 
-- A `clink` target in launch-relay so any trigger source can launch here.
+- A `paired` target in launch-relay so any trigger source can launch here.
 - Webhooks on `Launched` and `Swap` so agents react without polling.
 - A signing service with budgets, approval callbacks and an audit ledger,
   reusing the approval design from launch-relay: dry run by default, live behind

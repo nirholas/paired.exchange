@@ -3,7 +3,7 @@ pragma solidity 0.8.28;
 
 import {Script} from "forge-std/Script.sol";
 import {console} from "forge-std/console.sol";
-import {ClinkLaunchpad} from "../src/ClinkLaunchpad.sol";
+import {PairedLaunchpad} from "../src/PairedLaunchpad.sol";
 
 /// @notice Deploy the launchpad and register the stock tokens it can pair against.
 ///
@@ -25,11 +25,11 @@ contract Deploy is Script {
 	uint16 constant SWAP_FEE_BPS = 100; // 1%
 
 	function run() external {
-		address treasury = vm.envOr("CLINK_TREASURY", msg.sender);
+		address treasury = vm.envOr("PAIRED_TREASURY", msg.sender);
 		vm.startBroadcast();
 
-		ClinkLaunchpad pad = new ClinkLaunchpad(treasury, LAUNCH_FEE, SWAP_FEE_BPS);
-		console.log("ClinkLaunchpad", address(pad));
+		PairedLaunchpad pad = new PairedLaunchpad(treasury, LAUNCH_FEE, SWAP_FEE_BPS);
+		console.log("PairedLaunchpad", address(pad));
 		console.log("treasury", treasury);
 
 		address[24] memory stocks = [
@@ -68,6 +68,6 @@ contract Deploy is Script {
 
 		console.log("");
 		console.log("Set these and redeploy the apps:");
-		console.log("  CLINK_LAUNCHPAD / VITE_LAUNCHPAD =", address(pad));
+		console.log("  PAIRED_LAUNCHPAD / VITE_LAUNCHPAD =", address(pad));
 	}
 }

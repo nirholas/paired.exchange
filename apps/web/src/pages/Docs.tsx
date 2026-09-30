@@ -56,7 +56,7 @@ export default function Docs() {
 				<div className="max-w-2xl space-y-12 text-sm leading-relaxed text-white/75">
 					<Section id="what" title="What this is">
 						<p>
-							clink.fun is a permissionless launchpad on Robinhood Chain. Anyone can deploy a
+							paired.exchange is a permissionless launchpad on Robinhood Chain. Anyone can deploy a
 							fixed-supply ERC-20 that is priced against one to five tokenized stocks. There is no
 							listing process, no allowlist and no approval step.
 						</p>
@@ -94,7 +94,7 @@ export default function Docs() {
 
 					<Section id="mcp" title="Launch from Claude">
 						<p>
-							clink.fun is a remote MCP server, so Claude (or any assistant that speaks the Model Context
+							paired.exchange is a remote MCP server, so Claude (or any assistant that speaks the Model Context
 							Protocol) can browse markets, read coins, price trades and plan a launch for you. Planning is as
 							far as the assistant gets: it hands you a launch link, you open it, connect your own wallet,
 							review, and sign. Nothing is deployed and nothing is spent until you do.
@@ -107,12 +107,12 @@ export default function Docs() {
 							</li>
 							<li>
 								<span className="text-white/90">Claude Code:</span>
-								<CopyField value={`claude mcp add --transport http clink ${mcpUrl}`} />
+								<CopyField value={`claude mcp add --transport http paired ${mcpUrl}`} />
 							</li>
 							<li>
 								<span className="text-white/90">Clients that launch servers over stdio</span> (Cursor, Cline, Windsurf,
 								Claude Desktop config files) run the bridge package:
-								<CopyField value="npx -y clink-mcp" />
+								<CopyField value="npx -y paired-mcp" />
 							</li>
 						</ol>
 						<p>Then ask for what you want, for example: "launch a coin called Chip Dip, ticker CHIPS, 70% NVDA and 30% AMD".</p>

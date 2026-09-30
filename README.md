@@ -1,4 +1,4 @@
-# paired.exchange 
+# paired.exchange
 
 <!-- three.ws:badges -->
 [![GitHub stars](https://img.shields.io/github/stars/nirholas/paired.exchange?style=flat&logo=github)](https://github.com/nirholas/paired.exchange/stargazers) [![Last commit](https://img.shields.io/github/last-commit/nirholas/paired.exchange?style=flat)](https://github.com/nirholas/paired.exchange/commits) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat)](https://github.com/nirholas/paired.exchange/pulls) [![AI agent friendly](https://img.shields.io/badge/AI%20agents-AGENTS.md%20%2B%20llms.txt-6d5dfc?style=flat)](https://github.com/nirholas/paired.exchange/blob/HEAD/AGENTS.md)
@@ -29,9 +29,9 @@ earn    ──→  70% of every swap fee, claimable across all pairings in one t
 | [`apps/web/`](apps/web) | The site. React, Vite, Tailwind, wagmi | 7 pages, typechecked, builds |
 | [`apps/api/`](apps/api) | Image and descriptor hosting, chain reads, the MCP server at `/mcp` | running, tested |
 | [`packages/sdk/`](packages/sdk) | TypeScript SDK for launching programmatically | chain and stock registry |
-| [`packages/mcp/`](packages/mcp) | `clink-mcp`, the stdio bridge for MCP clients that launch servers with `npx` | tested against the live tool set |
+| [`packages/mcp/`](packages/mcp) | `paired-mcp`, the stdio bridge for MCP clients that launch servers with `npx` | tested against the live tool set |
 | [`docs/`](docs) | Deploy guide, architecture, API reference | |
-| [`docs/research/launchpads.md`](docs/research/launchpads.md) | The launchpad report: UX, UI, mechanics and revenue of the ten highest-earning launchpads, with a ranked feature list for clink.fun | 13,000 words |
+| [`docs/research/launchpads.md`](docs/research/launchpads.md) | The launchpad report: UX, UI, mechanics and revenue of the ten highest-earning launchpads, with a ranked feature list for paired.exchange | 13,000 words |
 | [`ROADMAP.md`](ROADMAP.md) | MCP, x402, agents, and the launchpad feature matrix | |
 
 ## Run it
@@ -51,7 +51,7 @@ forge script script/Deploy.s.sol:Deploy \
 
 # Then point the apps at it
 cd ..
-export CLINK_LAUNCHPAD=0x...        # api
+export PAIRED_LAUNCHPAD=0x...        # api
 export VITE_LAUNCHPAD=0x...         # web
 npm run dev
 ```
@@ -62,18 +62,18 @@ development and production.
 
 ## Launch from Claude
 
-clink.fun is a remote MCP server, so Claude, or any assistant that speaks the
+paired.exchange is a remote MCP server, so Claude, or any assistant that speaks the
 [Model Context Protocol](https://modelcontextprotocol.io), can browse markets,
 read coins, price trades and plan a launch.
 
 ```bash
 # Claude Code
-claude mcp add --transport http clink https://clink-fun-93741856042.us-central1.run.app/mcp
+claude mcp add --transport http paired https://paired.exchange/mcp
 ```
 
 Claude on the web or desktop: Settings, Connectors, Add custom connector, then
 paste the same URL. Clients that start servers over stdio run
-`npx -y clink-mcp` ([packages/mcp](packages/mcp)).
+`npx -y paired-mcp` ([packages/mcp](packages/mcp)).
 
 | Tool | Does |
 |---|---|
@@ -100,7 +100,7 @@ attester, and the keccak of the descriptor bytes is committed on chain at
 launch. Anyone can recover the signer of
 
 ```
-clink.fun launch origin v1
+paired.exchange launch origin v1
 channel: prompt
 draft: <draft id>
 name: <coin name>

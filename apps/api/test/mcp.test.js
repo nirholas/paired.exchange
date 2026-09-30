@@ -9,11 +9,11 @@ import { join } from 'node:path';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 
-const dataDir = await mkdtemp(join(tmpdir(), 'clink-test-'));
-process.env.CLINK_DATA_DIR = dataDir;
-process.env.CLINK_PUBLIC_URL = 'https://clink.test';
-process.env.CLINK_LAUNCHPAD = '0x6a546350f79DE0Fc83ADfCe99233183aA090fa15';
-process.env.CLINK_ATTESTER_KEY = `0x${'11'.repeat(32)}`;
+const dataDir = await mkdtemp(join(tmpdir(), 'paired-test-'));
+process.env.PAIRED_DATA_DIR = dataDir;
+process.env.PAIRED_PUBLIC_URL = 'https://paired.test';
+process.env.PAIRED_LAUNCHPAD = '0x6a546350f79DE0Fc83ADfCe99233183aA090fa15';
+process.env.PAIRED_ATTESTER_KEY = `0x${'11'.repeat(32)}`;
 
 const { createApp } = await import('../src/app.js');
 const { store } = await import('../src/context.js');
@@ -126,7 +126,7 @@ test('a draft-bound descriptor carries an origin the attester signed', async () 
 
 	// Changing any signed field breaks the signature.
 	assert.equal(await verifyOrigin({ ...descriptor, symbol: 'OTHER' }), false);
-	assert.match(originMessage({ channel: 'prompt', draft: 'x', name: 'n', symbol: 's' }), /^clink\.fun launch origin v1\n/);
+	assert.match(originMessage({ channel: 'prompt', draft: 'x', name: 'n', symbol: 's' }), /^paired\.exchange launch origin v1\n/);
 });
 
 test('callers cannot write an origin themselves', async () => {
@@ -146,7 +146,7 @@ test('the public draft shape exposes the launch link and status', async () => {
 	const draft = await draftFixture();
 	const shaped = publicDraft(draft);
 	assert.equal(shaped.status, 'awaiting signature');
-	assert.equal(shaped.launchUrl, `https://clink.test/launch?draft=${draft.id}`);
+	assert.equal(shaped.launchUrl, `https://paired.test/launch?draft=${draft.id}`);
 	assert.equal('scannedTo' in shaped, false);
 	assert.equal(publicDraft({ ...draft, expiresAt: new Date(0).toISOString() }).status, 'expired');
 });

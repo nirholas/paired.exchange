@@ -1,4 +1,4 @@
-// clink.fun API.
+// paired.exchange API.
 //
 // Deliberately small. The launchpad contract is the source of truth for which
 // tokens exist and what they are worth, so this server never owns that state.

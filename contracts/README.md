@@ -1,11 +1,11 @@
-# clink.fun contracts
+# paired.exchange contracts
 
 Two contracts, no dependencies, no proxy.
 
 | Contract | What it is |
 |---|---|
-| `ClinkLaunchpad.sol` | Factory, bonding curves, fee accounting, claims |
-| `ClinkToken.sol` | Fixed-supply ERC-20 with no admin surface at all |
+| `PairedLaunchpad.sol` | Factory, bonding curves, fee accounting, claims |
+| `PairedToken.sol` | Fixed-supply ERC-20 with no admin surface at all |
 
 ```bash
 forge install foundry-rs/forge-std --no-git   # once

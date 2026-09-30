@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity 0.8.28;
 
-import {ClinkToken} from "./ClinkToken.sol";
+import {PairedToken} from "./PairedToken.sol";
 import {IERC20, SafeTransfer} from "./IERC20.sol";
 
-/// @title ClinkLaunchpad
+/// @title PairedLaunchpad
 /// @notice Launch a fixed-supply coin priced against one or more tokenized
 /// stocks, and trade it on a self-contained bonding curve per pairing.
 ///
@@ -25,7 +25,7 @@ import {IERC20, SafeTransfer} from "./IERC20.sol";
 ///
 /// No external dependencies. No AMM, no router, no oracle, no upgradeable
 /// proxy. The contract someone reads is the contract that runs.
-contract ClinkLaunchpad {
+contract PairedLaunchpad {
 	using SafeTransfer for IERC20;
 
 	// ── constants ────────────────────────────────────────────────────────────
@@ -206,7 +206,7 @@ contract ClinkLaunchpad {
 		if (weightTotal != BPS) revert WeightsMustTotalBps();
 
 		token = address(
-			new ClinkToken(p.name, p.symbol, TOTAL_SUPPLY, p.metadataURI, p.metadataHash, address(this))
+			new PairedToken(p.name, p.symbol, TOTAL_SUPPLY, p.metadataURI, p.metadataHash, address(this))
 		);
 
 		creatorOf[token] = msg.sender;

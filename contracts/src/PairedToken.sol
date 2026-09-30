@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity 0.8.28;
 
-/// @title ClinkToken
+/// @title PairedToken
 /// @notice A fixed-supply ERC-20 minted once, in full, to the launchpad.
 ///
 /// @dev Deliberately minimal. There is no mint function, no owner, no pause,
@@ -9,7 +9,7 @@ pragma solidity 0.8.28;
 /// could pull on holders later, and a launchpad whose tokens carry them is
 /// asking buyers to trust the deployer. The supply that exists at construction
 /// is the supply that will ever exist.
-contract ClinkToken {
+contract PairedToken {
 	string public name;
 	string public symbol;
 	uint8 public constant decimals = 18;

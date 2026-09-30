@@ -9,7 +9,7 @@ import { MAX_IMAGE_BYTES } from './store.js';
 createApp().listen(PORT, () => {
 	console.log(`[api] listening on ${PORT}`);
 	console.log(`[api] data dir ${DATA_DIR}`);
-	console.log(`[api] launchpad ${LAUNCHPAD || 'NOT SET (set CLINK_LAUNCHPAD)'}`);
+	console.log(`[api] launchpad ${LAUNCHPAD || 'NOT SET (set PAIRED_LAUNCHPAD)'}`);
 	console.log(`[api] mcp ${PUBLIC_URL}/mcp`);
 	console.log(`[api] origin attester ${attesterAddress() || 'not set (MCP launches carry an unsigned origin)'}`);
 	console.log(`[api] max image ${(MAX_IMAGE_BYTES / 1024 / 1024).toFixed(0)}MB`);

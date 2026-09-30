@@ -71,7 +71,7 @@ export function NotConfigured() {
 		<div className="panel px-6 py-14 text-center">
 			<h3 className="text-base font-medium">No launchpad configured</h3>
 			<p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted">
-				Deploy the contract and set <code className="font-mono text-accent-soft">CLINK_LAUNCHPAD</code> on the
+				Deploy the contract and set <code className="font-mono text-accent-soft">PAIRED_LAUNCHPAD</code> on the
 				API and <code className="font-mono text-accent-soft">VITE_LAUNCHPAD</code> on the web app.
 				See the deploy guide in the docs.
 			</p>

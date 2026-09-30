@@ -20,7 +20,7 @@ export default function OriginBadge({
 	const who = assistantName(origin.client);
 	const label = `via ${who === 'your assistant' ? 'assistant' : who}`;
 	const title = origin.verified
-		? `Planned in ${who} over MCP. The launch carries an origin record signed by the clink.fun attester.`
+		? `Planned in ${who} over MCP. The launch carries an origin record signed by the paired.exchange attester.`
 		: `Planned in ${who} over MCP.`;
 	const className =
 		size === 'md'

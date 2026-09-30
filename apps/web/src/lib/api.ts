@@ -68,7 +68,7 @@ export interface StockToken {
 	logoUrl?: string;
 }
 
-export interface ClinkConfig {
+export interface PairedConfig {
 	chainId: number;
 	launchpad: `0x${string}` | null;
 	launchFeeWei: string;
@@ -108,7 +108,7 @@ export const api = {
 			`/api/tokens/${address}/candles?interval=${interval}${market ? `&market=${market}` : ''}`,
 		),
 
-	config: () => get<ClinkConfig>('/api/config'),
+	config: () => get<PairedConfig>('/api/config'),
 	stocks: () => get<StockToken[]>('/api/stocks'),
 	tokens: (limit = 50, offset = 0) =>
 		get<{ items: TokenSummary[]; total: number }>(`/api/tokens?limit=${limit}&offset=${offset}`),

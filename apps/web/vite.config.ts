@@ -8,7 +8,7 @@ export default defineConfig({
 		// The API is a separate process in development and the same origin in
 		// production, so the app always calls /api/* and the proxy makes that
 		// true locally too.
-		proxy: { '/api': { target: process.env.CLINK_API_URL || 'http://localhost:8787', changeOrigin: true } },
+		proxy: { '/api': { target: process.env.PAIRED_API_URL || 'http://localhost:8787', changeOrigin: true } },
 	},
 	build: { outDir: 'dist', sourcemap: true },
 });

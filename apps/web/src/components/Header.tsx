@@ -15,15 +15,17 @@ export function Logo({ className = '' }: { className?: string }) {
 		<span className={`inline-flex items-center gap-2 ${className}`}>
 			<svg viewBox="0 0 32 32" className="h-7 w-7" aria-hidden="true">
 				<defs>
-					<linearGradient id="clink-g" x1="0" y1="0" x2="1" y2="1">
+					<linearGradient id="paired-g" x1="0" y1="0" x2="1" y2="1">
 						<stop offset="0" stopColor="#c084fc" />
 						<stop offset="1" stopColor="#38bdf8" />
 					</linearGradient>
 				</defs>
 				<circle cx="13" cy="16" r="8" fill="none" stroke="currentColor" strokeWidth="2.6" opacity="0.9" />
-				<circle cx="22.5" cy="16" r="4.4" fill="url(#clink-g)" />
+				<circle cx="22.5" cy="16" r="4.4" fill="url(#paired-g)" />
 			</svg>
-			<span className="display text-[17px] font-bold">clink.fun</span>
+			<span className="display text-[17px] font-bold">
+				paired<span className="text-white/45">.exchange</span>
+			</span>
 		</span>
 	);
 }
@@ -48,7 +50,7 @@ export default function Header() {
 	return (
 		<header className="sticky top-0 z-40 border-b border-white/6 bg-ink-950/70 backdrop-blur-xl">
 			<div className="mx-auto flex h-16 max-w-7xl items-center gap-6 px-4 sm:px-6">
-				<Link to="/" className="text-white transition-opacity hover:opacity-80" aria-label="clink.fun home">
+				<Link to="/" className="text-white transition-opacity hover:opacity-80" aria-label="paired.exchange home">
 					<Logo />
 				</Link>
 

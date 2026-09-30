@@ -76,7 +76,7 @@ export default function Footer() {
 				</div>
 
 				<div className="mt-10 flex flex-col gap-2 border-t border-white/5 pt-5 text-xs text-muted sm:flex-row sm:items-center">
-					<span>clink.fun</span>
+					<span>paired.exchange</span>
 					<span className="sm:ml-auto">
 						Tokens are speculative and permanent. Nothing here is financial advice.
 					</span>

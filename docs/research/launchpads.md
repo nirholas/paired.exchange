@@ -1,6 +1,6 @@
 # The Launchpad Report: UX, UI and features of the ten highest-earning token launchpads across every chain
 
-Compiled 2026-08-28 for the clink.fun team. Every number is dated and sourced. Where a figure is a company claim rather than on-chain data it is labelled as such. Where the live site could not be crawled (geoblocks, WAFs, or the product being offline) the section says so and explains where the description came from instead.
+Compiled 2026-08-28 for the paired.exchange team. Every number is dated and sourced. Where a figure is a company claim rather than on-chain data it is labelled as such. Where the live site could not be crawled (geoblocks, WAFs, or the product being offline) the section says so and explains where the description came from instead.
 
 The ten platforms were chosen by lifetime fee revenue on DefiLlama as of today, with one editorial substitution: Believe is included despite having collapsed because it invented two primitives (launch-by-reply and the creator-majority split) that every later launchpad copied, and the story of how it died is more instructive than another platform that merely survived.
 
@@ -39,7 +39,7 @@ The lesson for a new launchpad is not "you cannot win". It is that a spike is pu
 
 ## Part 2: The ten, one at a time
 
-Each profile follows the same shape: revenue, mechanics, every page, design system, integrations, what shipped in 2025-2026, what is wrong with it, and what clink.fun should take from it.
+Each profile follows the same shape: revenue, mechanics, every page, design system, integrations, what shipped in 2025-2026, what is wrong with it, and what paired.exchange should take from it.
 
 ### 2.1 pump.fun (Solana)
 
@@ -94,7 +94,7 @@ Quote mints (October 2026 program upgrade, https://github.com/pump-fun/pump-publ
 
 **Weaknesses.** Solidus Labs found 98.6% of pump.fun tokens ended as pump-and-dumps or liquidity drains. UK users have been banned since December 2024. The "Pump Enterprise" class action (SDNY, July 2025) alleges $722M revenue against $4 to 5.5B of retail losses. The team cashed out $465.5M of PUMP in November 2025 with no investor lockups. Livestreams were suspended in November 2024 after violent content and the same pattern appeared on GO's launch day. Alon Cohen admitted creator fees "skewed incentives toward low-risk coin creation", which is why the fee model was rewritten three times in six months.
 
-**What clink.fun takes.** The bump animation. The bonding-curve progress percentage adjacent to the trade pane. Quick presets on the trade pane. Reply threads with images. The three-column trenches layout for an advanced view. Creator fee sharing to N recipients with bps summing to 10,000 (clink already has `setFeeRecipient`; a multi-recipient split is the next step). The Cashback Coin idea (route creator fees to traders) is a one-flag feature on our contract.
+**What paired.exchange takes.** The bump animation. The bonding-curve progress percentage adjacent to the trade pane. Quick presets on the trade pane. Reply threads with images. The three-column trenches layout for an advanced view. Creator fee sharing to N recipients with bps summing to 10,000 (Paired already has `setFeeRecipient`; a multi-recipient split is the next step). The Cashback Coin idea (route creator fees to traders) is a one-flag feature on our contract.
 
 ### 2.2 Bonk.fun (letsbonk.fun, Solana)
 
@@ -134,13 +134,13 @@ No referral program, no native app, and the Volume tab has said "Coming soon" fo
 
 **Weaknesses.** Coinbase's Conor Grogan showed one wallet created 13,169 tokens of which 62 ever traded, and 13 wallets launched 4,200+ tokens in 24 hours; the rewards structure paid bot farms. Share collapsed from 78% to 3% in five weeks. Fee narrative churn destroyed the burn story. The COO admitted creator fees enabled abuse. Token pages have no sniper, bundler or insider metrics. Raydium's upgrade changed LP economics for every LaunchLab platform unilaterally, which is the cost of not owning the contract.
 
-**What clink.fun takes.** Standardized card image sizes. The post-buy share modal with market cap baked into the copy. Quote-aware balances (clink's pools are quoted in stocks, so the buy pane must show the SPCX balance, not ETH). Saveable launch Configurations. The daily Bond Rewards pool is a cheap, legible incentive. And a negative lesson: own the contract; we do.
+**What paired.exchange takes.** Standardized card image sizes. The post-buy share modal with market cap baked into the copy. Quote-aware balances (Paired's pools are quoted in stocks, so the buy pane must show the SPCX balance, not ETH). Saveable launch Configurations. The daily Bond Rewards pool is a cheap, legible incentive. And a negative lesson: own the contract; we do.
 
 ### 2.3 Four.meme (BNB Chain)
 
 **Revenue.** All-time fees $97.98M and protocol revenue $96.57M on $9.90B of bonding-curve volume (DefiLlama, 2026-08-27). The monthly series tells the story: February 2025 $1.9M, March $5.8M, September $2.9M, **October 2025 $44.0M**, November $4.7M, January 2026 $10.5M, March $5.8M, July $1.4M, August to date $0.3M. Roughly 45% of all-time revenue came from one month. The catalyst was CZ's "#BNB meme szn" post on October 7, 2025 and the "4" token, which hit $212M market cap within hours and minted 21 new millionaires. October 8 saw 47,800 launches (3.5x the prior day), $4.22M in fees, $414M in volume and daily revenue of $4.1M versus pump.fun's $900K (https://www.cryptotimes.io/2025/10/08/bnb-chains-four-meme-launchpad-overtakes-pump-fun-in-daily-revenue/). The platform reported 812K daily unique users, 2M cumulative users, 400K tokens and a 1.3% graduation rate. Today the ecosystem category is still $704M in market cap, dominated by 币安人生 ("Binance Life") at $481M.
 
-**Mechanics.** Fixed 1B supply, 800M on the curve, 200M reserved for the PancakeSwap V2 pool with LP burned. Progress formula `100 - ((balance - 200M) * 100 / 800M)`. Gross raise 24 BNB, about 18 BNB net to the pool. Quote assets: BNB, USDT, USD1, UUSD and, since August 2026, bStocks such as NVDAb, which makes Four.meme the second launchpad after clink.fun's own model to pair memes with tokenized equities ("Stock Memes", August 1, 2026, https://www.coingabbar.com/en/crypto-currency-news/bnb-news-today-four-meme-stock-memes-launch-update). Creation costs about 0.005 BNB in gas; trading fee 1% with a 0.001 BNB minimum. Dev buy is in the same `createToken` transaction. Launch time is schedulable and max buy per user is configurable. Every token address ends in `4444` via CREATE2.
+**Mechanics.** Fixed 1B supply, 800M on the curve, 200M reserved for the PancakeSwap V2 pool with LP burned. Progress formula `100 - ((balance - 200M) * 100 / 800M)`. Gross raise 24 BNB, about 18 BNB net to the pool. Quote assets: BNB, USDT, USD1, UUSD and, since August 2026, bStocks such as NVDAb, which makes Four.meme the second launchpad after paired.exchange's own model to pair memes with tokenized equities ("Stock Memes", August 1, 2026, https://www.coingabbar.com/en/crypto-currency-news/bnb-news-today-four-meme-stock-memes-launch-update). Creation costs about 0.005 BNB in gas; trading fee 1% with a 0.001 BNB minimum. Dev buy is in the same `createToken` transaction. Launch time is schedulable and max buy per user is configurable. Every token address ends in `4444` via CREATE2.
 
 X Mode (October 30, 2025): an anti-sniper fee that starts at 100% on block 0 and decays block by block to 1% around block 6; everything above 1% buys and burns the token right after migration. Token Name Protection locks a name and ticker for 72 hours once a coin has 100+ holders. Tax Tokens: 1/3/5/10% with burn/dividend/liquidity/recipient allocations summing to 100, dividends auto-distributed daily once $1,000 accrues. Creator rewards in classic mode are only the 10% referral cut; OpenFour (June 2026) adds "GoPlus Creator Incentives" that scale from 0.02% to a 1% cap with market cap, and a "Skill Royalty" split of 70/15/15. The Binance Wallet exclusive path ("Meme Rush", October 9, 2025) runs Keyless-only curve phases where tokens are non-transferable until migration at about $1M FDV, then a Migrated Tokens Ranking and a shot at a Binance Alpha listing, with 4x Alpha Points.
 
@@ -164,7 +164,7 @@ X Mode (October 30, 2025): an anti-sniper fee that starts at 100% on block 0 and
 
 **Weaknesses.** Two exploits in five weeks: February 11, 2025 (~$183K; migration called `createAndInitializePoolIfNecessary` without checking for a pre-existing V3 pair, so an attacker pre-initialised a pool at an absurd price) and March 18, 2025 (~$130K; a function let tokens reach a not-yet-created pair address, bypassing transfer restrictions). An MEV sandwich on a migration took ~$180K. FCFS curves favour bots; 1.3% graduation; geoblocks; the 97% decline from peak.
 
-**What clink.fun takes.** The category label on the create form. Trending keywords as a discovery surface. The 80% progress badge and the round-number market-cap badge. The MEV toggle. The Bubble Map. Most of all, the migration exploit is a checklist item for us: when clink graduates a pool, the code must verify no pre-existing pool at the target address and must initialise price from the curve, never from whatever is already there. And Stock Memes with NVDAb confirms the market is moving toward what clink.fun already does.
+**What paired.exchange takes.** The category label on the create form. Trending keywords as a discovery surface. The 80% progress badge and the round-number market-cap badge. The MEV toggle. The Bubble Map. Most of all, the migration exploit is a checklist item for us: when Paired graduates a pool, the code must verify no pre-existing pool at the target address and must initialise price from the curve, never from whatever is already there. And Stock Memes with NVDAb confirms the market is moving toward what paired.exchange already does.
 
 ### 2.4 Zora (Base)
 
@@ -204,7 +204,7 @@ Fee split since September 15, 2025 (Coins v2.2.0): 1% total, of which creator 50
 
 **Weaknesses.** Sterling Crispin called it a "toxic hypercasino hellscape" where retail "gets rinsed by snipers, bundlers, coordinated pump and dumps, FNF groups, and industrial scale autonomous trading bots." The official Base account's content coin crashed 95% within hours in April 2025; Nick Shirley's creator coin hit $15M and fell 79% in 48 hours. New addresses per month fell from 60K+ to under 10K. Rewards paid in ZORA create constant sell pressure on the asset everything is backed by, and the stacked backing means one creator coin drawdown drags every post beneath it. Activation is irreversible and pairs are non-editable. The $0.50 floor makes micro trades expensive relative to a "free to post" pitch.
 
-**What clink.fun takes.** Realized PnL with shareable cards. The Autosell ladder. Prices and gas in USD. The "filter by paired asset" explore view maps exactly onto clink's stock pairs. Green/pink is worth an experiment. The LP remint idea (a slice of fees deepens the pool permanently) is a contract-level feature we could add to `ClinkLaunchpad`. And the stacked-backing failure is a warning against ever making one clink coin the quote asset for another.
+**What paired.exchange takes.** Realized PnL with shareable cards. The Autosell ladder. Prices and gas in USD. The "filter by paired asset" explore view maps exactly onto Paired's stock pairs. Green/pink is worth an experiment. The LP remint idea (a slice of fees deepens the pool permanently) is a contract-level feature we could add to `PairedLaunchpad`. And the stacked-backing failure is a warning against ever making one Paired coin the quote asset for another.
 
 ### 2.5 Virtuals Protocol (Base and Solana)
 
@@ -224,7 +224,7 @@ ACP (Agent Commerce Protocol) is the actual business now: Request, Negotiation, 
 
 **Weaknesses.** Revenue whiplash and total narrative dependence. Over 90% of wallets underwater. aGDP is self-reported, double-counts chained jobs and is exposed to wash trading. The fee structure has changed at least three times and docs contradict each other. Solana presence is thin (4,413 wallets over $10 versus 113,806 on EVM). Prompt injection against agent wallets is an open security topic.
 
-**What clink.fun takes.** The scheduled launch with a public radar page, so a launch has a countdown and an audience before it goes live. The decaying sniper tax with a founder-chosen window. Dev-lock badges (green / yellow / DYOR) on cards. The "Hire" and "Trade" pairing is the template for clink's roadmap agents: every clink coin page can have an action that is not trading.
+**What paired.exchange takes.** The scheduled launch with a public radar page, so a launch has a countdown and an audience before it goes live. The decaying sniper tax with a founder-chosen window. Dev-lock badges (green / yellow / DYOR) on cards. The "Hire" and "Trade" pairing is the template for Paired's roadmap agents: every Paired coin page can have an action that is not trading.
 
 ### 2.6 Clanker (Base and seven other EVM chains)
 
@@ -250,7 +250,7 @@ MEV modules shape the first swaps: a two-block delay, a sniper auction (up to fi
 
 **Weaknesses.** Token slop and a 95% 48-hour death rate. The presale whale problem. A co-founder outed as the Velodrome insider who took $350K in 2022 (April 30, 2025). CLANKER 91% below its October 2025 high. Creators paid in their own token tend to market-sell. Deploy gating depends on Neynar. The effective creator share varies by interface and version (40%, 80%, 100%) and coverage constantly misstates it. Two nav links 404.
 
-**What clink.fun takes.** Seven-recipient fee splits with immutable bps and per-recipient payout token: this is the multi-recipient version of clink's `setFeeRecipient`. Interface attribution in calldata so third-party front ends can earn. The "No Data Here means no swap yet" empty state on the chart. The vesting "No issues" summary line. Preclank (save a launch config, fire it later from a social trigger) is the exact primitive the launch-relay bot needs. The stock-token pairing with jurisdiction checkboxes is the legal pattern for our own stock pairs.
+**What paired.exchange takes.** Seven-recipient fee splits with immutable bps and per-recipient payout token: this is the multi-recipient version of Paired's `setFeeRecipient`. Interface attribution in calldata so third-party front ends can earn. The "No Data Here means no swap yet" empty state on the chart. The vesting "No issues" summary line. Preclank (save a launch config, fire it later from a social trigger) is the exact primitive the launch-relay bot needs. The stock-token pairing with jurisdiction checkboxes is the legal pattern for our own stock pairs.
 
 ### 2.7 Believe (Solana)
 
@@ -266,7 +266,7 @@ The launch primitive: post an idea on X, then reply `@launchcoin $TICKER (Token 
 
 **Weaknesses.** The migration from LAUNCHCOIN to BELIEVE advertised a "25%" supply increase that was actually 33% (Cobie: "100 x 1.25 is 133"), zeroed LPs and 15% of non-migrated holders, and was front-run by top wallets. Twelve buyback statements went unfulfilled. A class action (SDNY, March 23, 2026) alleges $54M in fees on $6B volume against false "0 ownership" claims. The founder was arrested April 22, 2026 on assault charges. App Store reviews cite broken fee claims and no developer response.
 
-**What clink.fun takes.** The durable ideas: launch-by-social-reply, the creator-majority split, the 24-hour claim lock, scout rewards for people who surface ideas, and a verifiable on-chain flywheel with proof memos. The lethal mistakes: mutable metadata, a supply-diluting migration, promises the contract did not enforce, and single-founder key-person risk. Every one of those is avoidable in code.
+**What paired.exchange takes.** The durable ideas: launch-by-social-reply, the creator-majority split, the 24-hour claim lock, scout rewards for people who surface ideas, and a verifiable on-chain flywheel with proof memos. The lethal mistakes: mutable metadata, a supply-diluting migration, promises the contract did not enforce, and single-founder key-person risk. Every one of those is avoidable in code.
 
 ### 2.8 Bags (Solana and Robinhood Chain)
 
@@ -276,7 +276,7 @@ The launch primitive: post an idea on X, then reply `@launchcoin $TICKER (Token 
 
 Fee sharing is mandatory: up to 100 claimers identified by social handle (X, Kick, GitHub, and TikTok since April 2026), bps summing to 10,000, the creator must list themselves, more than 15 claimers auto-creates an address lookup table, and recipients cannot change after launch because "it would feel deceptive". Partners who route launches through their key take 25% of fees. Claimed amounts are public: hover the green checkmark on any token page. Optional dividends pay the top 100 holders every 24 hours once the pool hits 7 SOL. DAMM v2 direct launches skip the curve and seed a pool quoted in xStocks or Ondo tokenized equities, with fees paid in the quote mint.
 
-On Robinhood Chain (chain 4663) Bags runs an x*y=k curve selling 830M of 1B in ETH, graduates into Uniswap v4 with locked LP, charges a flat 2% split 1% creator / 1% protocol, and takes 0.02 ETH to launch. "Index tokens" auto-convert creator fees into a fixed basket of one to ten tokenized stocks and airdrop them to holders pro rata roughly every minute once 0.001 ETH accrues (https://docs.bags.fm/robinhood/index-tokens.md). This is the closest existing product to clink.fun, and it ships on our chain.
+On Robinhood Chain (chain 4663) Bags runs an x*y=k curve selling 830M of 1B in ETH, graduates into Uniswap v4 with locked LP, charges a flat 2% split 1% creator / 1% protocol, and takes 0.02 ETH to launch. "Index tokens" auto-convert creator fees into a fixed basket of one to ten tokenized stocks and airdrop them to holders pro rata roughly every minute once 0.001 ETH accrues (https://docs.bags.fm/robinhood/index-tokens.md). This is the closest existing product to paired.exchange, and it ships on our chain.
 
 **Every page.**
 
@@ -298,7 +298,7 @@ On Robinhood Chain (chain 4663) Bags runs an x*y=k curve selling 830M of 1B in E
 
 **Weaknesses.** Volume collapse after January. Non-consensual tokenization ("a random stranger starting a Patreon or GoFundMe in your name"). The GSD Cloud rug (May 22, 2026): the hackathon winner's founder deleted accounts and extracted roughly $500K including a grant and a contest prize. Dividends to the top 100 favour whales. Immutable recipients block legitimate corrections. The fiat off-ramp is manual despite "cash out to your bank" marketing.
 
-**What clink.fun takes.** Launch Intent URLs (a prefilled launch from a query string) are cheap to build and make every partner integration trivial. Public claimed-royalty amounts on the coin page. M / V / L labels. Fee-mode presets with a market-cap decay option. Index tokens are a direct competitor feature on Robinhood Chain; clink's answer is that our pools are quoted in the stocks themselves, so holders do not need a conversion step to have stock exposure. That distinction belongs on the homepage.
+**What paired.exchange takes.** Launch Intent URLs (a prefilled launch from a query string) are cheap to build and make every partner integration trivial. Public claimed-royalty amounts on the coin page. M / V / L labels. Fee-mode presets with a market-cap decay option. Index tokens are a direct competitor feature on Robinhood Chain; Paired's answer is that our pools are quoted in the stocks themselves, so holders do not need a conversion step to have stock exposure. That distinction belongs on the homepage.
 
 ### 2.9 Moonshot (Solana, mobile)
 
@@ -318,7 +318,7 @@ App fees: 2.5% on trades of $1 to $250 with a $0.99 minimum, 1% above $250. Wall
 
 **Weaknesses.** The $0.99 minimum punishes small buys; reviewers report fees "50x normal" during spikes. Trustpilot 2.8/5 with multi-week bank withdrawal delays and bot-only support. Congestion during dumps ("almost impossible to pull your money out"). No limit orders, no external dApp connections, no desktop. Regulatory exposure from 250x no-KYC leverage. Curation means listing coins late ("already up 30,000%").
 
-**What clink.fun takes.** USD-denominated trade entry with a payment-source picker. A curated Discover list as a first-run surface for non-degens, separate from the firehose. Verification plus front-page placement as the reward for hitting a milestone. The MPC-plus-Face-ID onboarding sets the bar for what "no seed phrase" should feel like.
+**What paired.exchange takes.** USD-denominated trade entry with a payment-source picker. A curated Discover list as a first-run surface for non-degens, separate from the firehose. Verification plus front-page placement as the reward for hitting a milestone. The MPC-plus-Face-ID onboarding sets the bar for what "no seed phrase" should feel like.
 
 ### 2.10 SunPump (TRON)
 
@@ -332,7 +332,7 @@ App fees: 2.5% on trades of $1 to $250 with a $0.99 minimum, 1% above $250. Wall
 
 **Weaknesses.** An 89% fee decline from 2024 to 2025 and near dormancy now. The TRX-pegged graduation. No creator economics and nothing to retain builders. TronLink dependence and Chromium-only browsers. No sniper tax or MEV protection. No public API docs.
 
-**What clink.fun takes.** The "Virtual Liquidity" label that switches to real liquidity after graduation is an honest way to present a curve's fake depth. Sunflare (a feature slot at 80% progress) rewards momentum. The CEX Alliance apply modal is a reminder that the coin page can be the front door to things beyond trading. The TRX-pegged graduation is the warning: clink's graduation targets are set per market in the quote stock, so if a stock's price doubles the graduation bar in dollars doubles too. That needs either a USD-anchored target read from an oracle or clear copy explaining the bar moves with the stock.
+**What paired.exchange takes.** The "Virtual Liquidity" label that switches to real liquidity after graduation is an honest way to present a curve's fake depth. Sunflare (a feature slot at 80% progress) rewards momentum. The CEX Alliance apply modal is a reminder that the coin page can be the front door to things beyond trading. The TRX-pegged graduation is the warning: Paired's graduation targets are set per market in the quote stock, so if a stock's price doubles the graduation bar in dollars doubles too. That needs either a USD-anchored target read from an oracle or clear copy explaining the bar moves with the stock.
 
 ---
 
@@ -378,7 +378,7 @@ Three observations. First, every Solana launchpad pins a "king of the hill" (the
 | Live | pump.fun | Livestream embedded on the coin page itself |
 | Beyond trading | Virtuals, SunPump | "Hire" next to "Trade"; CEX Alliance apply |
 
-The coin page that combines these does not exist yet. clink.fun already has the five-view chart and the trade feed; the gaps are the holders map, the fee transparency block, the vesting summary and embedded social proof.
+The coin page that combines these does not exist yet. paired.exchange already has the five-view chart and the trade feed; the gaps are the holders map, the fee transparency block, the vesting summary and embedded social proof.
 
 ### 3.3 The create page
 
@@ -399,7 +399,7 @@ Fields, in order of how many of the ten collect them:
 13. Prefill from URL (1). Bags Launch Intent.
 14. Saved configurations (1). Bonk.fun.
 
-clink.fun's launch page already collects 1 through 7 plus market selection and weights, which no one else has in this form. Adding a category label, a scheduled launch time, a Launch Intent URL, saved configurations and a fee-mode preset would make it the most complete create form in the category.
+paired.exchange's launch page already collects 1 through 7 plus market selection and weights, which no one else has in this form. Adding a category label, a scheduled launch time, a Launch Intent URL, saved configurations and a fee-mode preset would make it the most complete create form in the category.
 
 ### 3.4 The profile page
 
@@ -438,7 +438,7 @@ Two patterns recur in the ones that lasted: pay out on a fixed schedule with a v
 | Metadata | frozen | frozen | name locked at 100 holders | frozen | frozen | frozen | frozen | frozen to $600K | EAS-mutable | fixed pair |
 | Quote assets | SOL, USDC, listed tokens (xStocks), other pump coins | SOL, USD1, TRUMP | BNB, USDT, USD1, bStocks | SOL, xStocks | SOL | TRX | SOL | VIRTUAL | USDC, WETH, stocks | ZORA, creator coin, custom |
 
-Two rows matter most for clink.fun. The anti-snipe row: five of ten now ship a decaying launch fee, and the ones that do not (pump.fun, Bonk.fun, Bags) are the ones whose creators complain most about bundlers. `ClinkLaunchpad` has no launch-window fee today; a per-launch decaying fee with a founder-chosen window (Virtuals' four options are a good UI) is the single highest-value contract addition on this list. The quote-assets row: stock-quoted pools went from zero platforms in mid-2025 to four (Four.meme, Bags, Zora, Clanker) in the last twelve months, and pump.fun's October 2026 upgrade admits listed tokens such as xStocks and its own coins as quotes at the program level. The category clink.fun was built for is now contested, and clink's edge is that stocks are the only quote, with up to five per coin, rather than an optional pairing behind a checkbox.
+Two rows matter most for paired.exchange. The anti-snipe row: five of ten now ship a decaying launch fee, and the ones that do not (pump.fun, Bonk.fun, Bags) are the ones whose creators complain most about bundlers. `PairedLaunchpad` has no launch-window fee today; a per-launch decaying fee with a founder-chosen window (Virtuals' four options are a good UI) is the single highest-value contract addition on this list. The quote-assets row: stock-quoted pools went from zero platforms in mid-2025 to four (Four.meme, Bags, Zora, Clanker) in the last twelve months, and pump.fun's October 2026 upgrade admits listed tokens such as xStocks and its own coins as quotes at the program level. The category paired.exchange was built for is now contested, and Paired's edge is that stocks are the only quote, with up to five per coin, rather than an optional pairing behind a checkbox.
 
 ---
 
@@ -457,7 +457,7 @@ Two rows matter most for clink.fun. The anti-snipe row: five of ten now ship a d
 | SunPump | `#121215`, `#1B1B1F` | `#FFB020` amber | green / red | PingFang SC | Ant Design | bilingual |
 | Boop | `#0D121C` | `#0CAEE4` cyan, `#6E57F9` purple, `#FF8A14`, `#F8CC32` | green / `#F04438` | Poppins + DotMatrix | 16 / 24px, pills | "start ur cult" |
 
-Nine of ten are dark. Nine of ten use green/red. The only two that look like anything other than a trading terminal are Zora (monochrome, media-first, green/pink) and Moonshot (consumer fintech). clink.fun's current `ink` ramp plus a single accent sits in the majority; the decision to make is whether the stock pairing warrants a more "brokerage" register (Moonshot's Coinbase-meets-Venmo) than a "trenches" one. Given the audience the product is for (people who want stock exposure through a meme), the brokerage register is the differentiator, and Zora's proof that green/pink reads as "not a casino" is worth a test.
+Nine of ten are dark. Nine of ten use green/red. The only two that look like anything other than a trading terminal are Zora (monochrome, media-first, green/pink) and Moonshot (consumer fintech). paired.exchange's current `ink` ramp plus a single accent sits in the majority; the decision to make is whether the stock pairing warrants a more "brokerage" register (Moonshot's Coinbase-meets-Venmo) than a "trenches" one. Given the audience the product is for (people who want stock exposure through a meme), the brokerage register is the differentiator, and Zora's proof that green/pink reads as "not a casino" is worth a test.
 
 ---
 
@@ -478,11 +478,11 @@ pump.fun survived the same drawdowns because it kept shipping surfaces (app, Liv
 
 ---
 
-## Part 7: The clink.fun feature list, ranked
+## Part 7: The paired.exchange feature list, ranked
 
 Everything below is derived from the ten profiles. Ranking is by impact divided by effort against the codebase as it stands (Foundry contract, node API with event indexer, React and Vite front end).
 
-**Contract (`ClinkLaunchpad.sol`)**
+**Contract (`PairedLaunchpad.sol`)**
 1. Decaying launch fee with a founder-chosen window (Virtuals, Clanker, Zora, Four.meme, Heaven). Excess fee either to the pool (Zora remint) or to a buyback of the coin (Four.meme). Highest value item on the list; every 2026 launchpad has it.
 2. Multi-recipient creator fee split, up to 10 recipients, bps summing to 10,000, one change per token (pump.fun), with per-recipient payout-token choice (Clanker).
 3. A "cashback" flag that routes the creator share to traders pro rata (pump.fun Cashback Coins).
@@ -505,7 +505,7 @@ Everything below is derived from the ten profiles. Ranking is by impact divided 
 16. Filter the feed by paired stock (Zora's paired-asset explore), with Trending / Top / New per stock.
 17. Trade pane presets in the quote stock and in USD (pump.fun, Moonshot), balances that follow the pool's quote (Bonk.fun).
 18. Post-trade share modal with market cap in the copy (Bonk.fun).
-19. Chart empty state "No swap yet" (Clanker; clink's current empty state already points at the curve view, which is better).
+19. Chart empty state "No swap yet" (Clanker; Paired's current empty state already points at the curve view, which is better).
 20. "Virtual liquidity" label that becomes real liquidity after graduation (SunPump).
 21. Vesting summary line "Dev buy / Vaulted / Unlock / No issues" (Clanker).
 22. Category label on launch and as a feed filter (Four.meme).
@@ -517,7 +517,7 @@ Everything below is derived from the ten profiles. Ranking is by impact divided 
 
 **Distribution**
 28. Launch-by-social-reply (Believe, Clanker, Boop, SunPump), gated by account age or score and rate-limited per account, with the 24-hour claim lock (Believe).
-29. An agent skill file and CLI (Clanker, Zora, Bags, SunPump, pump.fun all ship one; it is table stakes for agent-driven launches and lines up with the MCP and x402 items already on the clink roadmap).
+29. An agent skill file and CLI (Clanker, Zora, Bags, SunPump, pump.fun all ship one; it is table stakes for agent-driven launches and lines up with the MCP and x402 items already on the Paired roadmap).
 30. Telegram MiniApp (Four.meme) before a native app; nobody in the ten got a native app right on the first try except Moonshot, which is a different business.
 
 ---
@@ -532,7 +532,7 @@ Everything below is derived from the ten profiles. Ranking is by impact divided 
 
 **Time.fun.** One token equals one minute of a creator's time, redeemable through escrow with a five-day refund. $92K lifetime fees. The reminder that a coin can carry a utility the contract enforces.
 
-**PumpSwap.** The volume benchmark for any post-graduation venue: 0.25% base swap fee (0.20% LP, 0.05% protocol) plus a 0.05% creator fee, all-time fees $782M and $421M in 2026 alone, peak day $5.45M. clink's graduated pools live on Uniswap V4 on Robinhood Chain; whatever fee schedule we choose should be benchmarked against this.
+**PumpSwap.** The volume benchmark for any post-graduation venue: 0.25% base swap fee (0.20% LP, 0.05% protocol) plus a 0.05% creator fee, all-time fees $782M and $421M in 2026 alone, peak day $5.45M. Paired's graduated pools live on Uniswap V4 on Robinhood Chain; whatever fee schedule we choose should be benchmarked against this.
 
 ---
 

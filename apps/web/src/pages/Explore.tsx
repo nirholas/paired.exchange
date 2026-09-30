@@ -113,7 +113,7 @@ export default function Explore() {
 					fromAssistant && !query && market === 'all' ? (
 						<Empty
 							title="No coins launched from Claude yet"
-							body="Connect clink.fun to Claude and ask it to launch a coin. You review and sign the launch with your own wallet."
+							body="Connect paired.exchange to Claude and ask it to launch a coin. You review and sign the launch with your own wallet."
 							actionLabel="Set up the connector"
 							actionTo="/docs#mcp"
 						/>

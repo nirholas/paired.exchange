@@ -19,7 +19,7 @@ export const ORIGIN_CHANNELS = ['prompt', 'site'];
 
 /** Read on every call so a key rotated through the environment is picked up by tests and restarts alike. */
 function attesterAccount() {
-	const key = process.env.CLINK_ATTESTER_KEY?.trim();
+	const key = process.env.PAIRED_ATTESTER_KEY?.trim();
 	return key && /^0x[0-9a-fA-F]{64}$/.test(key) ? privateKeyToAccount(key) : null;
 }
 
@@ -29,7 +29,7 @@ export function attesterAddress() {
 
 /** The exact text the attester signs. Stable by contract: changing it is a v2. */
 export function originMessage({ channel, draft, name, symbol }) {
-	return ['clink.fun launch origin v1', `channel: ${channel}`, `draft: ${draft}`, `name: ${name}`, `symbol: ${symbol}`].join('\n');
+	return ['paired.exchange launch origin v1', `channel: ${channel}`, `draft: ${draft}`, `name: ${name}`, `symbol: ${symbol}`].join('\n');
 }
 
 /**

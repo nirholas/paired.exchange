@@ -105,7 +105,7 @@ async function tokenAddresses(indices) {
  * descriptor rather than in anything the contract can index.
  */
 export async function listTokens({ limit = 50, offset = 0, origin } = {}) {
-	if (!LAUNCHPAD) return { items: [], total: 0, note: 'CLINK_LAUNCHPAD is not set' };
+	if (!LAUNCHPAD) return { items: [], total: 0, note: 'PAIRED_LAUNCHPAD is not set' };
 	const count = Number(await publicClient.readContract({ address: LAUNCHPAD, abi: launchpadAbi, functionName: 'tokenCount' }));
 
 	if (!origin) {

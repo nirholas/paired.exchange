@@ -20,7 +20,7 @@ import { PublicFetchError } from './net.js';
 import { STOCKS, findStock } from './stocks.js';
 import { feesCached, listTokensCached, tokenCached } from './tokens.js';
 
-const INSTRUCTIONS = `clink.fun launches coins on Robinhood Chain that are quoted in tokenized stocks (NVDA, TSLA, AAPL and more) instead of ETH or a stablecoin. Each coin has a fixed 1B supply split across one to five stock markets, each its own bonding curve with liquidity locked forever. The creator earns 70% of every swap fee, paid in the paired stock.
+const INSTRUCTIONS = `paired.exchange launches coins on Robinhood Chain that are quoted in tokenized stocks (NVDA, TSLA, AAPL and more) instead of ETH or a stablecoin. Each coin has a fixed 1B supply split across one to five stock markets, each its own bonding curve with liquidity locked forever. The creator earns 70% of every swap fee, paid in the paired stock.
 
 To launch: call plan_launch with what the user asked for. It validates everything and returns a launch link valid for 24 hours. Show the user the summary and the link. They open it, connect their own wallet, review, and sign; nothing is deployed and nothing is spent until they do. Afterwards, launch_status returns the coin's address.
 
@@ -129,7 +129,7 @@ function draftSummary(draft, fees) {
 }
 
 export function buildServer({ client, allowPlan }) {
-	const server = new McpServer({ name: 'clink.fun', version: '1.0.0' }, { instructions: INSTRUCTIONS });
+	const server = new McpServer({ name: 'paired.exchange', version: '1.0.0' }, { instructions: INSTRUCTIONS });
 
 	server.registerTool(
 		'list_markets',

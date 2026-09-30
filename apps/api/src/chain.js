@@ -13,7 +13,7 @@ import { createPublicClient, http, defineChain, parseAbiItem } from 'viem';
 
 export const ROBINHOOD_CHAIN_ID = 4663;
 
-const RPC_URLS = (process.env.CLINK_RPC_URLS || 'https://rpc.mainnet.chain.robinhood.com,https://robinhood-rpc.publicnode.com')
+const RPC_URLS = (process.env.PAIRED_RPC_URLS || 'https://rpc.mainnet.chain.robinhood.com,https://robinhood-rpc.publicnode.com')
 	.split(',')
 	.map((s) => s.trim())
 	.filter(Boolean);
@@ -28,7 +28,7 @@ export const chain = defineChain({
 
 export const publicClient = createPublicClient({ chain, transport: http(RPC_URLS[0]) });
 
-export const LAUNCHPAD = process.env.CLINK_LAUNCHPAD || '';
+export const LAUNCHPAD = process.env.PAIRED_LAUNCHPAD || '';
 
 export const launchpadAbi = [
 	{ name: 'tokenCount', type: 'function', stateMutability: 'view', inputs: [], outputs: [{ type: 'uint256' }] },

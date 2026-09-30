@@ -1,7 +1,7 @@
 {
-	"name": "@clink/sdk",
+	"name": "@paired/sdk",
 	"version": "0.1.0",
-	"description": "TypeScript SDK for clink.fun: launch and trade coins paired with tokenized stocks on Robinhood Chain.",
+	"description": "TypeScript SDK for paired.exchange: launch and trade coins paired with tokenized stocks on Robinhood Chain.",
 	"type": "module",
 	"license": "Apache-2.0",
 	"main": "./dist/index.js",

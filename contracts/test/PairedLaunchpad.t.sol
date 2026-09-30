@@ -2,13 +2,13 @@
 pragma solidity 0.8.28;
 
 import {Test} from "forge-std/Test.sol";
-import {ClinkLaunchpad} from "../src/ClinkLaunchpad.sol";
-import {ClinkToken} from "../src/ClinkToken.sol";
+import {PairedLaunchpad} from "../src/PairedLaunchpad.sol";
+import {PairedToken} from "../src/PairedToken.sol";
 import {IERC20} from "../src/IERC20.sol";
 import {MockStock} from "./MockStock.sol";
 
-contract ClinkLaunchpadTest is Test {
-	ClinkLaunchpad pad;
+contract PairedLaunchpadTest is Test {
+	PairedLaunchpad pad;
 	MockStock nvda;
 	MockStock tsla;
 	MockStock aapl;
@@ -26,7 +26,7 @@ contract ClinkLaunchpadTest is Test {
 	uint8 constant NO_DEV_BUY = type(uint8).max;
 
 	function setUp() public {
-		pad = new ClinkLaunchpad(treasury, LAUNCH_FEE, SWAP_FEE_BPS);
+		pad = new PairedLaunchpad(treasury, LAUNCH_FEE, SWAP_FEE_BPS);
 		nvda = new MockStock("NVDA");
 		tsla = new MockStock("TSLA");
 		aapl = new MockStock("AAPL");
@@ -44,19 +44,19 @@ contract ClinkLaunchpadTest is Test {
 
 	// ── helpers ──────────────────────────────────────────────────────────────
 
-	function _alloc(address q, uint16 w) internal pure returns (ClinkLaunchpad.Allocation memory) {
-		return ClinkLaunchpad.Allocation({quoteToken: q, weightBps: w});
+	function _alloc(address q, uint16 w) internal pure returns (PairedLaunchpad.Allocation memory) {
+		return PairedLaunchpad.Allocation({quoteToken: q, weightBps: w});
 	}
 
-	function _params(ClinkLaunchpad.Allocation[] memory allocs)
+	function _params(PairedLaunchpad.Allocation[] memory allocs)
 		internal
 		view
-		returns (ClinkLaunchpad.LaunchParams memory)
+		returns (PairedLaunchpad.LaunchParams memory)
 	{
-		return ClinkLaunchpad.LaunchParams({
+		return PairedLaunchpad.LaunchParams({
 			name: "Test Coin",
 			symbol: "TEST",
-			metadataURI: "https://clink.fun/m/abc",
+			metadataURI: "https://paired.exchange/m/abc",
 			metadataHash: keccak256("abc"),
 			allocations: allocs,
 			creatorFeeRecipient: address(0),
@@ -67,8 +67,8 @@ contract ClinkLaunchpadTest is Test {
 		});
 	}
 
-	function _oneMarket() internal view returns (ClinkLaunchpad.LaunchParams memory) {
-		ClinkLaunchpad.Allocation[] memory a = new ClinkLaunchpad.Allocation[](1);
+	function _oneMarket() internal view returns (PairedLaunchpad.LaunchParams memory) {
+		PairedLaunchpad.Allocation[] memory a = new PairedLaunchpad.Allocation[](1);
 		a[0] = _alloc(address(nvda), 10_000);
 		return _params(a);
 	}
@@ -82,7 +82,7 @@ contract ClinkLaunchpadTest is Test {
 
 	function test_launch_mintsFixedSupplyIntoTheCurves() public {
 		address token = _launch();
-		assertEq(ClinkToken(token).totalSupply(), pad.TOTAL_SUPPLY());
+		assertEq(PairedToken(token).totalSupply(), pad.TOTAL_SUPPLY());
 		assertEq(IERC20(token).balanceOf(address(pad)), pad.TOTAL_SUPPLY());
 		assertEq(pad.creatorOf(token), creator);
 		assertEq(pad.feeRecipientOf(token), creator);
@@ -96,12 +96,12 @@ contract ClinkLaunchpadTest is Test {
 
 	function test_launch_rejectsAWrongFee() public {
 		vm.prank(creator);
-		vm.expectRevert(ClinkLaunchpad.BadFee.selector);
+		vm.expectRevert(PairedLaunchpad.BadFee.selector);
 		pad.launch{value: LAUNCH_FEE - 1}(_oneMarket());
 	}
 
 	function test_launch_splitsSupplyExactlyAcrossMarkets() public {
-		ClinkLaunchpad.Allocation[] memory a = new ClinkLaunchpad.Allocation[](3);
+		PairedLaunchpad.Allocation[] memory a = new PairedLaunchpad.Allocation[](3);
 		a[0] = _alloc(address(nvda), 3_334);
 		a[1] = _alloc(address(tsla), 3_333);
 		a[2] = _alloc(address(aapl), 3_333);
@@ -120,49 +120,49 @@ contract ClinkLaunchpadTest is Test {
 	}
 
 	function test_launch_requiresWeightsToTotalExactly() public {
-		ClinkLaunchpad.Allocation[] memory a = new ClinkLaunchpad.Allocation[](2);
+		PairedLaunchpad.Allocation[] memory a = new PairedLaunchpad.Allocation[](2);
 		a[0] = _alloc(address(nvda), 5_000);
 		a[1] = _alloc(address(tsla), 4_999);
 		vm.prank(creator);
-		vm.expectRevert(ClinkLaunchpad.WeightsMustTotalBps.selector);
+		vm.expectRevert(PairedLaunchpad.WeightsMustTotalBps.selector);
 		pad.launch{value: LAUNCH_FEE}(_params(a));
 	}
 
 	function test_launch_rejectsDuplicateMarkets() public {
-		ClinkLaunchpad.Allocation[] memory a = new ClinkLaunchpad.Allocation[](2);
+		PairedLaunchpad.Allocation[] memory a = new PairedLaunchpad.Allocation[](2);
 		a[0] = _alloc(address(nvda), 5_000);
 		a[1] = _alloc(address(nvda), 5_000);
 		vm.prank(creator);
-		vm.expectRevert(ClinkLaunchpad.DuplicateMarket.selector);
+		vm.expectRevert(PairedLaunchpad.DuplicateMarket.selector);
 		pad.launch{value: LAUNCH_FEE}(_params(a));
 	}
 
 	function test_launch_rejectsADisabledQuote() public {
 		MockStock other = new MockStock("GME");
-		ClinkLaunchpad.Allocation[] memory a = new ClinkLaunchpad.Allocation[](1);
+		PairedLaunchpad.Allocation[] memory a = new PairedLaunchpad.Allocation[](1);
 		a[0] = _alloc(address(other), 10_000);
 		vm.prank(creator);
-		vm.expectRevert(ClinkLaunchpad.QuoteNotEnabled.selector);
+		vm.expectRevert(PairedLaunchpad.QuoteNotEnabled.selector);
 		pad.launch{value: LAUNCH_FEE}(_params(a));
 	}
 
 	function test_launch_rejectsMoreThanFiveMarkets() public {
-		ClinkLaunchpad.Allocation[] memory a = new ClinkLaunchpad.Allocation[](6);
+		PairedLaunchpad.Allocation[] memory a = new PairedLaunchpad.Allocation[](6);
 		for (uint256 i; i < 6; ++i) {
 			MockStock s = new MockStock("X");
 			pad.setQuoteConfig(address(s), VIRTUAL_QUOTE, true);
 			a[i] = _alloc(address(s), i == 5 ? 1_668 : 1_666);
 		}
 		vm.prank(creator);
-		vm.expectRevert(ClinkLaunchpad.TooManyMarkets.selector);
+		vm.expectRevert(PairedLaunchpad.TooManyMarkets.selector);
 		pad.launch{value: LAUNCH_FEE}(_params(a));
 	}
 
 	function test_launch_rejectsAnExpiredDeadline() public {
-		ClinkLaunchpad.LaunchParams memory p = _oneMarket();
+		PairedLaunchpad.LaunchParams memory p = _oneMarket();
 		p.deadline = block.timestamp - 1;
 		vm.prank(creator);
-		vm.expectRevert(ClinkLaunchpad.Expired.selector);
+		vm.expectRevert(PairedLaunchpad.Expired.selector);
 		pad.launch{value: LAUNCH_FEE}(p);
 	}
 
@@ -178,7 +178,7 @@ contract ClinkLaunchpadTest is Test {
 	}
 
 	function test_launch_withADevBuyGivesTheCreatorTokens() public {
-		ClinkLaunchpad.LaunchParams memory p = _oneMarket();
+		PairedLaunchpad.LaunchParams memory p = _oneMarket();
 		p.devBuyMarket = 0;
 		p.devBuyQuoteIn = 10e18;
 
@@ -192,11 +192,11 @@ contract ClinkLaunchpadTest is Test {
 	}
 
 	function test_launch_rejectsADevBuyOnAMarketItDidNotOpen() public {
-		ClinkLaunchpad.LaunchParams memory p = _oneMarket();
+		PairedLaunchpad.LaunchParams memory p = _oneMarket();
 		p.devBuyMarket = 3;
 		p.devBuyQuoteIn = 1e18;
 		vm.prank(creator);
-		vm.expectRevert(ClinkLaunchpad.BadDevBuy.selector);
+		vm.expectRevert(PairedLaunchpad.BadDevBuy.selector);
 		pad.launch{value: LAUNCH_FEE}(p);
 	}
 
@@ -231,7 +231,7 @@ contract ClinkLaunchpadTest is Test {
 		address token = _launch();
 		vm.startPrank(trader);
 		nvda.approve(address(pad), type(uint256).max);
-		vm.expectRevert(ClinkLaunchpad.SlippageExceeded.selector);
+		vm.expectRevert(PairedLaunchpad.SlippageExceeded.selector);
 		pad.buy(token, address(nvda), 10e18, type(uint256).max);
 		vm.stopPrank();
 	}
@@ -275,7 +275,7 @@ contract ClinkLaunchpadTest is Test {
 	function test_trading_rejectsAnUnknownMarket() public {
 		address token = _launch();
 		vm.prank(trader);
-		vm.expectRevert(ClinkLaunchpad.UnknownMarket.selector);
+		vm.expectRevert(PairedLaunchpad.UnknownMarket.selector);
 		pad.buy(token, address(tsla), 1e18, 0);
 	}
 
@@ -313,7 +313,7 @@ contract ClinkLaunchpadTest is Test {
 
 	/// @dev The improvement over one-transaction-per-asset claiming.
 	function test_claimFees_batchesEveryAssetInOneTransaction() public {
-		ClinkLaunchpad.Allocation[] memory a = new ClinkLaunchpad.Allocation[](2);
+		PairedLaunchpad.Allocation[] memory a = new PairedLaunchpad.Allocation[](2);
 		a[0] = _alloc(address(nvda), 5_000);
 		a[1] = _alloc(address(tsla), 5_000);
 		vm.prank(creator);
@@ -341,7 +341,7 @@ contract ClinkLaunchpadTest is Test {
 		address[] memory assets = new address[](1);
 		assets[0] = address(nvda);
 		vm.prank(creator);
-		vm.expectRevert(ClinkLaunchpad.NothingToClaim.selector);
+		vm.expectRevert(PairedLaunchpad.NothingToClaim.selector);
 		pad.claimFees(assets);
 	}
 
@@ -369,20 +369,20 @@ contract ClinkLaunchpadTest is Test {
 	function test_setFeeRecipient_onlyByTheCurrentRecipient() public {
 		address token = _launch();
 		vm.prank(trader);
-		vm.expectRevert(ClinkLaunchpad.NotFeeRecipient.selector);
+		vm.expectRevert(PairedLaunchpad.NotFeeRecipient.selector);
 		pad.setFeeRecipient(token, trader);
 	}
 
 	// ── administration ───────────────────────────────────────────────────────
 
 	function test_setParams_capsTheSwapFee() public {
-		vm.expectRevert(ClinkLaunchpad.FeeTooHigh.selector);
+		vm.expectRevert(PairedLaunchpad.FeeTooHigh.selector);
 		pad.setParams(LAUNCH_FEE, 501, treasury);
 	}
 
 	function test_admin_isOwnerOnly() public {
 		vm.prank(trader);
-		vm.expectRevert(ClinkLaunchpad.NotOwner.selector);
+		vm.expectRevert(PairedLaunchpad.NotOwner.selector);
 		pad.setParams(0, 0, trader);
 	}
 
@@ -390,8 +390,8 @@ contract ClinkLaunchpadTest is Test {
 		address token = _launch();
 		// No mint, no owner, no pause. The supply is fixed at construction and
 		// nothing on the token can change it.
-		assertEq(ClinkToken(token).totalSupply(), pad.TOTAL_SUPPLY());
-		assertEq(ClinkToken(token).launchpad(), address(pad));
+		assertEq(PairedToken(token).totalSupply(), pad.TOTAL_SUPPLY());
+		assertEq(PairedToken(token).launchpad(), address(pad));
 	}
 
 	// ── fuzzing ──────────────────────────────────────────────────────────────
@@ -428,7 +428,7 @@ contract ClinkLaunchpadTest is Test {
 		}
 		vm.stopPrank();
 
-		ClinkLaunchpad.Curve memory c = pad.curveOf(token, address(nvda));
+		PairedLaunchpad.Curve memory c = pad.curveOf(token, address(nvda));
 		assertLe(c.realQuote, nvda.balanceOf(address(pad)));
 		assertEq(IERC20(token).balanceOf(address(pad)), c.tokensLeft);
 	}

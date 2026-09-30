@@ -1,5 +1,5 @@
 {
-	"name": "clink.fun",
+	"name": "paired.exchange",
 	"private": true,
 	"version": "0.1.0",
 	"description": "Launch coins paired with tokenized stocks. A permissionless launchpad on Robinhood Chain.",
@@ -8,10 +8,10 @@
 	"engines": { "node": ">=20" },
 	"workspaces": ["apps/web", "apps/api", "packages/sdk"],
 	"scripts": {
-		"dev": "npm run dev --workspace @clink/api & npm run dev --workspace @clink/web",
-		"dev:web": "npm run dev --workspace @clink/web",
-		"dev:api": "npm run dev --workspace @clink/api",
-		"build": "npm run build --workspace @clink/sdk && npm run build --workspace @clink/web",
+		"dev": "npm run dev --workspace @paired/api & npm run dev --workspace @paired/web",
+		"dev:web": "npm run dev --workspace @paired/web",
+		"dev:api": "npm run dev --workspace @paired/api",
+		"build": "npm run build --workspace @paired/sdk && npm run build --workspace @paired/web",
 		"typecheck": "npm run typecheck --workspaces --if-present",
 		"test": "npm run test --workspaces --if-present",
 		"contracts:test": "cd contracts && forge test -vv",

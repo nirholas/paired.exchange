@@ -19,26 +19,26 @@ COPY . .
 # rather than a runtime env var.
 ARG VITE_LAUNCHPAD=""
 ENV VITE_LAUNCHPAD=$VITE_LAUNCHPAD
-RUN npm run build --workspace @clink/web
+RUN npm run build --workspace @paired/web
 
 FROM node:22-alpine AS runtime
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 COPY apps/api/package.json apps/api/
-RUN npm ci --omit=dev --no-audit --no-fund --workspace @clink/api --include-workspace-root
+RUN npm ci --omit=dev --no-audit --no-fund --workspace @paired/api --include-workspace-root
 
 COPY apps/api/src ./apps/api/src
 COPY --from=build /src/apps/web/dist ./web
 
-RUN addgroup -S clink && adduser -S clink -G clink \
-	&& mkdir -p /data && chown -R clink:clink /data /app
-USER clink
+RUN addgroup -S paired && adduser -S paired -G paired \
+	&& mkdir -p /data && chown -R paired:paired /data /app
+USER paired
 
 ENV NODE_ENV=production \
 	PORT=8080 \
-	CLINK_DATA_DIR=/data \
-	CLINK_WEB_DIR=/app/web
+	PAIRED_DATA_DIR=/data \
+	PAIRED_WEB_DIR=/app/web
 
 EXPOSE 8080
 CMD ["node", "apps/api/src/server.js"]

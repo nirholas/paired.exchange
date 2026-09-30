@@ -1,7 +1,7 @@
-# clink-mcp
+# paired-mcp
 
 Launch coins paired with tokenized stocks on Robinhood Chain from any MCP
-client. This is a stdio bridge to the hosted [clink.fun](https://github.com/nirholas/clink.fun)
+client. This is a stdio bridge to the hosted [paired.exchange](https://github.com/nirholas/paired.exchange)
 MCP server: tools are discovered from the server at startup, so the package
 never falls behind the live tool set.
 
@@ -15,7 +15,7 @@ Clients that take a remote URL (Claude on the web and desktop via Settings,
 Connectors, Add custom connector; Claude Code) do not need this package:
 
 ```bash
-claude mcp add --transport http clink https://clink-fun-93741856042.us-central1.run.app/mcp
+claude mcp add --transport http paired https://paired.exchange/mcp
 ```
 
 Clients that start servers over stdio:
@@ -23,12 +23,12 @@ Clients that start servers over stdio:
 ```json
 {
   "mcpServers": {
-    "clink": { "command": "npx", "args": ["-y", "clink-mcp"] }
+    "paired": { "command": "npx", "args": ["-y", "paired-mcp"] }
   }
 }
 ```
 
-`CLINK_MCP_URL` points the bridge at a different deployment.
+`PAIRED_MCP_URL` points the bridge at a different deployment.
 
 ## Tools
 
