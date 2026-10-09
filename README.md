@@ -203,3 +203,7 @@ who buys it. Nothing here is financial advice.
 ## License
 
 Apache-2.0
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=nirholas/paired.exchange&type=Date)](https://www.star-history.com/#nirholas/paired.exchange&Date)
