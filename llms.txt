@@ -1,0 +1,28 @@
+# paired.exchange
+
+> Launch a coin paired with real stocks. Permissionless, fixed supply, liquidity nobody can pull. On Robinhood Chain. Every coin here is quoted in a tokenized equity rather than a stablecoin or the chain's gas token. A coin paired with NVDA trades against NVDA: its price, its depth, and the fees it pays its creator are all denominated in the stock.
+
+paired.exchange is an open-source repository by nirholas, part of the three.ws ecosystem.
+
+## Docs
+
+- [README](https://github.com/nirholas/paired.exchange/blob/HEAD/README.md): install, usage and reference
+- [What is in here](https://github.com/nirholas/paired.exchange/blob/HEAD/README.md#what-is-in-here)
+- [Run it](https://github.com/nirholas/paired.exchange/blob/HEAD/README.md#run-it)
+- [Launch from Claude](https://github.com/nirholas/paired.exchange/blob/HEAD/README.md#launch-from-claude)
+- [How the curve works](https://github.com/nirholas/paired.exchange/blob/HEAD/README.md#how-the-curve-works)
+- [Fees](https://github.com/nirholas/paired.exchange/blob/HEAD/README.md#fees)
+- [Three things it does that the incumbent does not](https://github.com/nirholas/paired.exchange/blob/HEAD/README.md#three-things-it-does-that-the-incumbent-does-not)
+- [Safety posture](https://github.com/nirholas/paired.exchange/blob/HEAD/README.md#safety-posture)
+- [Chain](https://github.com/nirholas/paired.exchange/blob/HEAD/README.md#chain)
+- [AGENTS.md](https://github.com/nirholas/paired.exchange/blob/HEAD/AGENTS.md): guidance for coding agents
+- [Full text for LLMs](https://github.com/nirholas/paired.exchange/blob/HEAD/llms-full.txt): the README inlined
+
+## Project
+
+- [Source](https://github.com/nirholas/paired.exchange)
+- [Issues](https://github.com/nirholas/paired.exchange/issues)
+- [Discussions](https://github.com/nirholas/paired.exchange/discussions)
+- [Homepage](https://paired.exchange)
+- [three.ws](https://three.ws): the platform this is part of
+- [All repositories by nirholas](https://github.com/nirholas/nirholas#readme)

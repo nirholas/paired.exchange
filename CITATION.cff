@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+title: "paired.exchange"
+abstract: "Launch a coin paired with real stocks. Permissionless, fixed supply, liquidity nobody can pull. On Robinhood Chain. Every coin here is quoted in a tokenized equity rather than a stablecoin or the chain's gas token. A coin paired with NVDA trades against NVDA: its price, its depth, and the fees it pays its creator are all denominated in the stock."
+repository-code: "https://github.com/nirholas/paired.exchange"
+url: "https://three.ws"
+authors:
+  - name: three.ws
+    website: "https://three.ws"
