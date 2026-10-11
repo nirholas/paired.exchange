@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAccount, useBalance, usePublicClient, useWalletClient } from 'wagmi';
-import { decodeEventLog, formatEther, keccak256, parseUnits, toBytes } from 'viem';
+import { BaseError, ContractFunctionRevertedError, decodeEventLog, formatEther, keccak256, parseUnits, toBytes } from 'viem';
 import { api } from '../lib/api';
 import { useConfig, useDraft, useStocks } from '../lib/hooks';
-import { LAUNCHPAD_ADDRESS, NO_DEV_BUY, erc20Abi, launchpadAbi } from '../lib/contracts';
+import { LAUNCHPAD_ADDRESS, NO_DEV_BUY, erc20Abi, launchpadAbi, type LaunchpadError } from '../lib/contracts';
 import { BRIDGES, ROBINHOOD_CHAIN_ID, txUrl } from '../lib/chain';
 import { assistantName, sanitizeName, sanitizeSymbol, shortAddress, trim } from '../lib/format';
 import type { LaunchDraft } from '../lib/api';
@@ -21,9 +21,36 @@ const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
  * balance cannot pay for and gets a raw RPC string back. */
 const GAS_HEADROOM_WEI = 300_000_000_000_000n; // 0.0003 ETH
 
+/** What each launchpad revert means for the person launching, and what to do
+ * about it. Only the errors `launch` can raise are listed; the rest fall back to
+ * naming the error. Names and tickers are free: any coin can be launched. */
+const LAUNCH_REVERTS: Partial<Record<LaunchpadError, string>> = {
+	WeightsMustTotalBps: 'Your market allocation has to total exactly 100%. Adjust the weights and try again.',
+	NoMarkets: 'Pick at least one stock market for your coin to trade in.',
+	TooManyMarkets: 'A coin can trade in at most five markets. Remove one and try again.',
+	DuplicateMarket: 'The same stock is selected twice. Each market can appear only once.',
+	QuoteNotEnabled: 'One of the stocks you picked is not enabled on the launchpad yet. Choose a different market.',
+	NameOrSymbolEmpty: 'Your coin needs both a name and a ticker.',
+	BadFee: 'The launch fee changed since this page loaded. Refresh and try again.',
+	Expired: 'The transaction sat unsigned for too long and the deadline passed. Press launch again to get a fresh one.',
+	BadDevBuy: 'The launch buy points at a market this coin does not trade in. Pick one of its markets or clear the buy.',
+	TransferToTreasuryFailed: 'The launch fee could not be forwarded, so nothing was created. Try again in a moment.',
+};
+
+function revertName(error: unknown): string | null {
+	if (!(error instanceof BaseError)) return null;
+	const reverted = error.walk((e) => e instanceof ContractFunctionRevertedError);
+	return reverted instanceof ContractFunctionRevertedError ? (reverted.data?.errorName ?? null) : null;
+}
+
 /** A wallet or node error is never shown raw. Every branch here says what
  * happened and what to do about it. */
 function explainError(error: unknown): string {
+	const name = revertName(error);
+	if (name) {
+		return LAUNCH_REVERTS[name as LaunchpadError] ?? `The contract rejected the launch (${name}). Nothing was spent.`;
+	}
+
 	const raw = error instanceof Error ? error.message : String(error);
 	const text = raw.toLowerCase();
 
@@ -43,7 +70,7 @@ function explainError(error: unknown): string {
 		return 'The transaction sat unsigned for too long and the deadline passed. Press launch again to get a fresh one.';
 	}
 	if (text.includes('reverted') || text.includes('execution reverted')) {
-		return 'The contract rejected the launch. Check that your allocation totals exactly 100% and that the ticker is not already taken.';
+		return 'The contract rejected the launch and nothing was spent. Check that your allocation totals exactly 100% and every market is enabled, then try again.';
 	}
 	if (text.includes('chain') && text.includes('mismatch')) {
 		return 'Your wallet is on the wrong network. Switch to Robinhood Chain and try again.';

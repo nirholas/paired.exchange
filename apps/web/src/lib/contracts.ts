@@ -7,6 +7,14 @@ export const BPS = 10_000;
 export const MAX_MARKETS = 5;
 export const TOTAL_SUPPLY = 1_000_000_000n * 10n ** 18n;
 
+const LAUNCHPAD_ERRORS = [
+	'NotOwner', 'Reentrancy', 'Expired', 'BadFee', 'NoMarkets', 'TooManyMarkets', 'WeightsMustTotalBps',
+	'DuplicateMarket', 'QuoteNotEnabled', 'UnknownMarket', 'ZeroAmount', 'SlippageExceeded', 'NothingToClaim',
+	'BadDevBuy', 'NameOrSymbolEmpty', 'NotFeeRecipient', 'FeeTooHigh', 'TransferToTreasuryFailed',
+] as const;
+
+export type LaunchpadError = (typeof LAUNCHPAD_ERRORS)[number];
+
 export const launchpadAbi = [
 	{
 		name: 'launch',
@@ -83,6 +91,9 @@ export const launchpadAbi = [
 	{ name: 'priceOf', type: 'function', stateMutability: 'view', inputs: [{ type: 'address' }, { type: 'address' }], outputs: [{ type: 'uint256' }] },
 	{ name: 'marketsOf', type: 'function', stateMutability: 'view', inputs: [{ type: 'address' }], outputs: [{ type: 'address[]' }] },
 	{ name: 'feeRecipientOf', type: 'function', stateMutability: 'view', inputs: [{ type: 'address' }], outputs: [{ type: 'address' }] },
+	// Every custom error the contract can revert with, so a rejected transaction
+	// decodes to its name instead of an anonymous revert.
+	...LAUNCHPAD_ERRORS.map((name) => ({ name, type: 'error' as const, inputs: [] as const })),
 ] as const;
 
 export const erc20Abi = [
