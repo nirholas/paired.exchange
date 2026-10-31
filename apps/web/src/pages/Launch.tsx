@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAccount, useBalance, usePublicClient, useWalletClient } from 'wagmi';
-import { BaseError, ContractFunctionRevertedError, decodeEventLog, formatEther, keccak256, parseUnits, toBytes } from 'viem';
+import { BaseError, ContractFunctionRevertedError, decodeEventLog, formatEther, formatUnits, keccak256, parseUnits, toBytes } from 'viem';
 import { api } from '../lib/api';
 import { useConfig, useDraft, useStocks } from '../lib/hooks';
 import { LAUNCHPAD_ADDRESS, NO_DEV_BUY, erc20Abi, launchpadAbi, type LaunchpadError } from '../lib/contracts';
@@ -594,7 +594,7 @@ export default function Launch() {
 							<div className="flex justify-between border-t border-white/8 pt-2">
 								<span className="text-muted">Your balance</span>
 								<span className={`font-mono ${shortOnEth ? 'text-down' : 'text-white/80'}`}>
-									{trim(balance.formatted, 5)} ETH
+									{trim(formatUnits(balance.value, balance.decimals), 5)} ETH
 								</span>
 							</div>
 						)}
@@ -609,7 +609,7 @@ export default function Launch() {
 							<p className="leading-relaxed text-white/70">
 								Launching costs {config ? trim(config.launchFeeEth, 6) : '0.0005'} ETH plus gas, so
 								keep about <span className="font-mono">{trim(formatEther(requiredWei), 5)} ETH</span>{' '}
-								on hand. You have <span className="font-mono">{trim(balance?.formatted ?? '0', 5)}</span>.
+								on hand. You have <span className="font-mono">{trim(balance ? formatUnits(balance.value, balance.decimals) : '0', 5)}</span>.
 							</p>
 							<div className="flex flex-wrap gap-2 pt-1">
 								{BRIDGES.map((bridge) => (

@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useAccount, useConnect, useDisconnect, useSwitchChain, useBalance } from 'wagmi';
+import { formatUnits } from 'viem';
 import { ROBINHOOD_CHAIN_ID } from '../lib/chain';
 import { shortAddress, trim } from '../lib/format';
 
@@ -78,7 +79,7 @@ export default function Header() {
 
 					{isConnected && !wrongChain && balance && (
 						<span className="hidden font-mono text-xs text-muted sm:inline">
-							{trim(balance.formatted, 4)} {balance.symbol}
+							{trim(formatUnits(balance.value, balance.decimals), 4)} {balance.symbol}
 						</span>
 					)}
 
