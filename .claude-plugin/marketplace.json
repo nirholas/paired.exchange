@@ -1,0 +1,20 @@
+{
+  "name": "paired-exchange",
+  "owner": {
+    "name": "nirholas"
+  },
+  "description": "Browse, price and plan coin launches paired with tokenized stocks on Robinhood Chain through the paired.exchange MCP server.",
+  "plugins": [
+    {
+      "name": "paired-exchange",
+      "source": "./",
+      "description": "Browse, price and plan coin launches paired with tokenized stocks on Robinhood Chain through the paired.exchange MCP server.",
+      "tags": [
+        "mcp",
+        "robinhood-chain",
+        "launchpad",
+        "stocks"
+      ]
+    }
+  ]
+}
