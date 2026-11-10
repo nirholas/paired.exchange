@@ -1,11 +1,12 @@
 {
   "name": "paired-exchange",
   "version": "0.1.0",
-  "description": "Browse, price and plan coin launches paired with tokenized stocks on Robinhood Chain through the paired.exchange MCP server.",
+  "description": "Browse, price and plan coin launches paired with tokenized stocks on Robinhood Chain with the paired.exchange MCP server.",
   "author": {
     "name": "nirholas"
   },
   "repository": "https://github.com/nirholas/paired.exchange",
+  "homepage": "https://github.com/nirholas/paired.exchange",
   "license": "Apache-2.0",
   "keywords": [
     "mcp",
@@ -13,6 +14,5 @@
     "tokenized-stocks",
     "launchpad",
     "bonding-curve"
-  ],
-  "homepage": "https://paired.exchange"
+  ]
 }

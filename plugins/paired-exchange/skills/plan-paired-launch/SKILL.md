@@ -1,13 +1,29 @@
 ---
 name: plan-paired-launch
-description: Use the paired.exchange MCP server to list stock markets, read coins, price trades, check creator fees and plan a coin launch that the user signs themselves. Use when asked about paired.exchange or launching a coin paired with a tokenized stock.
+description: Run the paired.exchange MCP server from a clone to list stock markets, read coins, price trades, check creator fees and plan a coin launch that the user signs themselves. Use when asked about paired.exchange or launching a coin paired with a tokenized stock on Robinhood Chain.
 ---
 
 # paired.exchange via MCP
 
-paired.exchange is a permissionless launchpad on Robinhood Chain where each coin is quoted in one to five tokenized stocks (for example NVDA) instead of a stablecoin. This plugin connects the hosted MCP server at `https://paired.exchange/mcp` (streamable HTTP, no key). Clients that only speak stdio can run `npx -y paired-mcp` instead (optional env `PAIRED_MCP_URL`).
+paired.exchange is a permissionless launchpad on Robinhood Chain where each coin is quoted in one to five tokenized stocks (for example NVDA) instead of a stablecoin. The MCP server lives in `apps/api` and is served at `/mcp` by the same process as the JSON API. The hosted instance is offline, so run it from a clone against the deployed launchpad (`0x6a546350f79DE0Fc83ADfCe99233183aA090fa15`, from `docs/deploy.md`).
 
-Manual install: `claude mcp add --transport http paired https://paired.exchange/mcp`
+## Run it
+
+Node 20 or newer:
+
+```bash
+git clone https://github.com/nirholas/paired.exchange && cd paired.exchange
+npm install
+export PAIRED_LAUNCHPAD=0x6a546350f79DE0Fc83ADfCe99233183aA090fa15
+export VITE_LAUNCHPAD=$PAIRED_LAUNCHPAD
+export PAIRED_PUBLIC_URL=http://localhost:3000
+npm run dev
+claude mcp add --transport http paired http://localhost:8787/mcp
+```
+
+`npm run dev` starts the API on port 8787 (`PORT`) and the web app on 3000, which proxies `/api` to the API. `PAIRED_PUBLIC_URL` is the origin that `plan_launch` links and coin pages point at, so setting it to the web app makes the returned `/launch?draft=<id>` link open locally. `PAIRED_RPC_URLS` defaults to the public Robinhood Chain RPCs; `PAIRED_DATA_DIR` holds drafts; `PAIRED_ATTESTER_KEY` is an optional throwaway key that signs the origin of MCP-planned coins.
+
+A launch commits `PAIRED_PUBLIC_URL` into the coin's on-chain metadata, so use a local server for reads and quotes, and only plan a real launch against a server running at a real public origin.
 
 ## Tools
 

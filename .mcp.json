@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "paired": {
-      "type": "http",
-      "url": "https://paired.exchange/mcp"
-    }
-  }
-}
